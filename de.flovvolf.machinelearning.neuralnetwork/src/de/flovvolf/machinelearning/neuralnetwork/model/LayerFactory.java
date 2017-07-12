@@ -10,8 +10,6 @@ import de.flovvolf.machinelearning.neuralnetwork.input.InputProvider;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.DefaultHiddenLayer;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.DefaultInputLayer;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.DefaultOutputLayer;
-import de.flovvolf.machinelearning.neuralnetwork.model.layer.GeneticHiddenLayer;
-import de.flovvolf.machinelearning.neuralnetwork.model.layer.HiddenLayer;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.InputLayer;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.OutputLayer;
 import de.flovvolf.machinelearning.neuralnetwork.model.neuron.Neuron;
@@ -45,10 +43,6 @@ public class LayerFactory {
 				.map(outcome -> neuronFactory.createNeuron(outcome, MathFunctions.SIGMOIDS))
 				.collect(Collectors.toList());
 		return new DefaultOutputLayer(neurons);
-	}
-
-	public HiddenLayer createDefaultGeneticLayer(String layerKey) {
-		return new GeneticHiddenLayer(layerKey, createNeurons(20, MathFunctions.HYPERBOLIC_TANGENCE));
 	}
 
 	private List<Neuron> createNeurons() {

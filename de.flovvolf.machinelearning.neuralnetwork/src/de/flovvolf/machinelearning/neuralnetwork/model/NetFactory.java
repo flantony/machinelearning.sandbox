@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.flovvolf.machinelearning.neuralnetwork.input.InputProvider;
-import de.flovvolf.machinelearning.neuralnetwork.model.layer.HiddenLayer;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.InputLayer;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.Layer;
 import de.flovvolf.machinelearning.neuralnetwork.model.net.NeuralNetwork;
@@ -38,10 +37,8 @@ public class NetFactory {
 			hiddenLayer.connectToPrevious(lastCreated);
 			lastCreated = hiddenLayer;
 		}
-		HiddenLayer geneticLayer = layerFactory.createDefaultGeneticLayer("Genetic");
-		geneticLayer.connectToPrevious(lastCreated);
 		Layer outputLayer = layerFactory.createDefaultOutputLayer(inputProvider);
-		outputLayer.connectToPrevious(geneticLayer);
+		outputLayer.connectToPrevious(lastCreated);
 	}
 
 	public void persist(NeuralNetwork network, String fileName) {
