@@ -13,7 +13,6 @@ import com.google.common.collect.Maps;
 import de.flovvolf.machinelearning.neuralnetwork.input.ExpectedOutcome;
 import de.flovvolf.machinelearning.neuralnetwork.model.Input;
 import de.flovvolf.machinelearning.neuralnetwork.model.Output;
-import de.flovvolf.machinelearning.neuralnetwork.model.neuron.DNA;
 import de.flovvolf.machinelearning.neuralnetwork.model.neuron.Neuron;
 import de.flovvolf.machinelearning.neuralnetwork.training.Result;
 import de.flovvolf.machinelearning.neuralnetwork.training.TrainingResult;
@@ -101,13 +100,6 @@ public abstract class AbstractLayer implements Layer {
 
 	protected List<Output> calculateLayer(List<Input> inputs) {
 		return this.neurons.parallelStream().map(neuron -> neuron.activate(inputs)).collect(Collectors.toList());
-	}
-
-	@Override
-	public void crossover(Map<String, Map<String, DNA>> DNAs) {
-		if (getFollowingLayer() != null) {
-			getFollowingLayer().crossover(DNAs);
-		}
 	}
 
 }

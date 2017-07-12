@@ -1,14 +1,12 @@
 package de.flovvolf.machinelearning.neuralnetwork.model.net;
 
 import java.util.List;
-import java.util.Map;
 
 import com.google.common.collect.Lists;
 
 import de.flovvolf.machinelearning.neuralnetwork.input.Instance;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.InputLayer;
 import de.flovvolf.machinelearning.neuralnetwork.model.layer.Layer;
-import de.flovvolf.machinelearning.neuralnetwork.model.neuron.DNA;
 import de.flovvolf.machinelearning.neuralnetwork.training.Result;
 import de.flovvolf.machinelearning.neuralnetwork.training.TrainingResult;
 
@@ -34,14 +32,6 @@ public class NeuralNetwork {
 
 	public TrainingResult test(Instance instance) {
 		return this.inputLayer.test(instance.getInput(), instance.getOutcome());
-	}
-
-	/** 
-	 * Takes the DNA of an other Neural Network. This will only have an effect on genetic Layers. Other Layers will ignore this call
-	 * @param crossoverDNA - the DNA to crossover with.
-	 */
-	public void crossover(Map<String, Map<String, DNA>> crossoverDNA) {
-		this.inputLayer.crossover(crossoverDNA);
 	}
 
 	public List<Layer> getLayers() {

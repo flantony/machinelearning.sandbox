@@ -94,13 +94,6 @@ public class Neuron {
 		return weights;
 	}
 
-	public DNA getDNA() {
-		DNA dna = new DNA();
-		dna.setNeuronKey(key);
-		dna.setWeights(weights.entrySet().stream()
-				.collect(Collectors.toMap(e -> e.getKey().getKey(), e -> e.getValue().getWeight())));
-		return dna;
-	}
 
 	public void mutate() {
 		Random random = new Random();
@@ -109,7 +102,4 @@ public class Neuron {
 		}
 	}
 
-	public void swap(DNA dna) {
-		dna.getWeights().forEach((key, value) -> Neuron.this.getWeight(key).setWeight(value));
-	}
 }
