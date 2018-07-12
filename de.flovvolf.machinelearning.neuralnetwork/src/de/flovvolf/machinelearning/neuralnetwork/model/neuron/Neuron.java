@@ -16,12 +16,12 @@ import de.flovvolf.machinelearning.neuralnetwork.model.Output;
 
 public class Neuron {
 
-	private Double learningRate = 0.001;
+	private Double learningRate = 0.5;
 	private final String key;
 	private ActivationFunction activationFunction;
 	private Map<Input, Weight> weights = Maps.newHashMap();
 	@JsonIgnore
-	private volatile Double netOutput;
+	private volatile Double netInput;
 
 	public Neuron(String key) {
 		super();
@@ -63,17 +63,17 @@ public class Neuron {
 	}
 
 	public Double train(Double deltaPrevious, Double input, Weight weight) {
-		Double delta = (activationFunction.calculateDerivative(netOutput) * deltaPrevious);
+		Double delta = (activationFunction.calculateDerivative(netInput) * deltaPrevious); //checked
 		Double changeOfWeight = this.learningRate * delta * input;
 		Double oldWeigt = weight.getWeight();
 		weight.correct(changeOfWeight);
-		return oldWeigt * delta;
+		return oldWeigt * delta; // checked
 	}
 
 	protected Double activationFunction(List<Input> inputs) {
-		this.netOutput = inputs.stream().map(input -> getWeight(input).getWeightedValue(input.getInput()))
+		this.netInput = inputs.stream().map(input -> getWeight(input).getWeightedValue(input.getInput()))
 				.reduce((a, b) -> a + b).orElse(0.0);
-		return getActivationFunction().calculate(netOutput);
+		return getActivationFunction().calculate(netInput);
 	}
 
 	protected synchronized Weight getWeight(Input input) {
